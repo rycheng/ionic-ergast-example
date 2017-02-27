@@ -1,4 +1,4 @@
-# Ionic 2 example using Ergast developer API
+# Ionic 2 example
 
 ### Installation
 
