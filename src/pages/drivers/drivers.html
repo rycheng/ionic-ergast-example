@@ -13,22 +13,32 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-card *ngFor="let driver of drivers; let i = index">
-    <ion-item>
+<ion-content class="list-avatar-page">
+  <ion-list >
+    <ion-list-header>
+      <ion-label>
+        <ion-icon name="search"></ion-icon>
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="searchTerm" placeholder="Search"></ion-input>
+    </ion-list-header>
+
+    <ion-item *ngFor="let driver of drivers | searchFilter:'givenName,familyName':searchTerm; let i = index; trackBy:driver?.driverId">
       <ion-avatar item-left>
         <img src="https://randomuser.me/api/portraits/thumb/men/{{i}}.jpg">
       </ion-avatar>
-      <h2>{{driver.givenName}} {{driver.familyName}}</h2>
+      <h2>
+        <a href="{{driver.url}}" target="_blank">
+          {{driver.givenName}} {{driver.familyName}}
+        </a>
+      </h2>
       <p>{{driver.dateOfBirth}}</p>
       <p>{{driver.nationality}}</p>
+      <ion-note item-right>
+        <button ion-button icon-left clear small (click)="showStandings($event, driver.driverId)">
+          Championship
+        </button>
+      </ion-note>
     </ion-item>
-    
-    <ion-card-content>
-      <button ion-button icon-left clear small (click)="showStandings($event, driver.driverId)">
-        Championship
-      </button>
-    </ion-card-content>
-  </ion-card>
+  </ion-list>
 
 </ion-content>

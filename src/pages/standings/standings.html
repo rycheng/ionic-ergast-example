@@ -7,7 +7,10 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Championship Standings</ion-title>
+    <ion-title *ngIf="standings.length == 0">Championship Standings</ion-title>
+    <ion-title *ngIf="standings.length > 0">
+      {{standings[0].DriverStandings[0].Driver.givenName}} {{standings[0].DriverStandings[0].Driver.familyName}} Championship Standings
+    </ion-title>
   </ion-navbar>
 
 </ion-header>

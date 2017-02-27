@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { LoadingController, NavController, NavParams, Loading } from 'ionic-angular';
 import { ErgastService } from '../../providers/ergast-service';
 
 /*
@@ -14,10 +14,16 @@ import { ErgastService } from '../../providers/ergast-service';
 })
 export class StandingsPage implements OnInit {
 
+  private loading: Loading;
   standings: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private service: ErgastService) {
+  constructor(public loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams, private service: ErgastService) {
     this.standings = [];
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+
+    this.loading.present();
   }
 
   ionViewDidLoad() {
@@ -27,9 +33,11 @@ export class StandingsPage implements OnInit {
   ngOnInit() {
     const id = this.navParams.get('driverId');
     console.log('ngOnInit...', id);
+
     this.service.getDriverStandings(id).subscribe(data => {
       this.standings = data;
       console.log('standings:', this.standings);
+      this.loading.dismiss();
     });
   }
 

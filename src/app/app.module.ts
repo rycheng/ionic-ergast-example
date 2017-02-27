@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { DriversPage } from '../pages/drivers/drivers';
 import { StandingsPage } from '../pages/standings/standings';
+import { GenericSearchPipe } from '../pipe/generic-search-pipe'
 
 @NgModule({
   declarations: [
@@ -16,10 +17,14 @@ import { StandingsPage } from '../pages/standings/standings';
     HomePage,
     TabsPage,
     DriversPage,
-    StandingsPage
+    StandingsPage,
+    GenericSearchPipe
   ],
   imports: [
     IonicModule.forRoot(MyApp)
+  ],
+  exports: [
+    GenericSearchPipe
   ],
   bootstrap: [IonicApp],
   entryComponents: [
